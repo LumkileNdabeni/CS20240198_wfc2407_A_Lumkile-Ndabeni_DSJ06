@@ -32,3 +32,13 @@ console.log(uppercaseProvinces);
 console.log("\nName Lengths:");
 const nameLengths = names.map(name => name.length);
 console.log(nameLengths);
+
+// Sorting alphabetically
+console.log("\nSorting:");
+const sortedProvinces = [...provinces].sort(); // Using spread operator to avoid mutating the original array
+console.log(sortedProvinces);
+
+// Filtering Cape
+console.log("\nFiltering Cape:");
+const provincesWithoutCape = provinces.filter(province => !province.includes("Cape"));
+console.log("Remaining provinces count:", provincesWithoutCape.length);
