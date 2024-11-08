@@ -42,3 +42,15 @@ console.log(sortedProvinces);
 console.log("\nFiltering Cape:");
 const provincesWithoutCape = provinces.filter(province => !province.includes("Cape"));
 console.log("Remaining provinces count:", provincesWithoutCape.length);
+
+// Finding 'S'
+console.log("\nFinding 'S':");
+const containsS = names.map(name => name.includes("S"));
+console.log(containsS);
+
+// Creating Object Mapping
+console.log("\nCreating Object Mapping:");
+const nameProvinceMap = names.reduce((acc, name, index) => {
+  acc[name] = provinces[index];
+  return acc;
+}, {});
