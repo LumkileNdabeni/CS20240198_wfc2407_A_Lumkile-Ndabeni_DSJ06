@@ -59,46 +59,44 @@ const nameProvinceMap = names.reduce((acc, name, index) => {
 }, {}); // Initial accumulator is an empty object
 console.log(nameProvinceMap);
 
-// Advanced Exercises (Single console.log Execution)
+// Advanced Exercises (Single console.log Execution) *************************************************************************************************************************************
 
-// Map Products by Name - Displaying a comma-separated list of all product names
-console.log("Products: " + products.map(product => product.product).join(', '));
+console.log(
+  // Display all product names as a comma-separated list
+  "Products: " + products.map(product => product.product).join(', ') + "\n" +
 
-// Filter by Name Length - Filtering products with names of length 5 or less and displaying them
-console.log("Filtered Products (Name Length <= 5): " + 
+  // Filter and display product names with a length of 5 or less
+  "Filtered Products (Name Length <= 5): " + 
   products
-    .filter(product => product.product.length <= 5)
-    .map(product => product.product)
-    .join(', ')
-);
+    .filter(product => product.product.length <= 5) // Filter names by length
+    .map(product => product.product) // Extract product names
+    .join(', ') + "\n" +
 
-// Price Manipulation - Total Price - Calculating the total price of products with valid prices
-console.log('Total Price of Products with valid prices:', 
+  // Calculate and display the total price of products with valid prices
+  "Total Price of Products with valid prices: " + 
   products
     .filter(product => product.price !== '' && product.price !== ' ') // Filter out products with missing prices
-    .map(product => ({ ...product, price: Number(product.price) })) // Convert price to number
-    .reduce((total, product) => total + product.price, 0) // Sum the prices
-);
+    .map(product => parseFloat(product.price)) // Convert price to float with parseFloat
+    .reduce((total, price) => total + price, 0) + "\n" + // Sum all valid prices
 
-// Concatenate Product Names - Concatenating all product names with commas
-console.log("Concatenated Product Names: " + 
+  // Concatenate all product names into a single string, separated by commas
+  "Concatenated Product Names: " + 
   products
-    .map(product => product.product)
-    .join(', ') // Join names with commas
-);
+    .map(product => product.product) // Extract product names
+    .join(', ') + "\n" + // Join names with commas
 
-// Find Extremes in Prices - Finding the highest and lowest price from products
-console.log("Price Extremes: " + (() => {
-  const prices = products
-    .map(product => parseFloat(product.price)) // Convert price to float
-    .filter(price => !isNaN(price)); // Filter out NaN values from empty prices
-  return `Highest: ${Math.max(...prices)}. Lowest: ${Math.min(...prices)}.`;
-})());
+  // Find and display the highest and lowest price among products
+  "Price Extremes: " + (() => {
+    const prices = products
+      .map(product => parseFloat(product.price)) // Convert price to float
+      .filter(price => !isNaN(price)); // Filter out NaN values from empty prices
+    return `Highest: ${Math.max(...prices)}. Lowest: ${Math.min(...prices)}.`; // Calculate max and min prices
+  })() + "\n" +
 
-// Object Transformation - Transform products array into an object where each key is a product name and the value is its price
-console.log("Transformed Products Object: " + 
+  // Transform the products array into an object where each key is a product name and value is its price
+  "Transformed Products Object: " + 
   JSON.stringify(products.reduce((acc, { product, price }) => {
-    acc[product] = price;
+    acc[product] = price; // Assign product name as key and price as value
     return acc;
   }, {}))
 );
