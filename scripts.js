@@ -65,3 +65,16 @@ console.log(products.forEach(product => console.log(product.product)));
 // Filter by Name Length
 console.log("\nFilter by Name Length:");
 console.log(products.filter(product => product.product.length <= 5));
+
+// Price Manipulation
+console.log("\nPrice Manipulation:");
+const totalPrice = products
+  .filter(product => product.price && !isNaN(product.price))
+  .map(product => Number(product.price))
+  .reduce((acc, price) => acc + price, 0);
+console.log(totalPrice);
+
+// Concatenate Product Names
+console.log("\nConcatenate Product Names:");
+const concatenatedNames = products.reduce((acc, product) => acc + product.product, "");
+console.log(concatenatedNames);
