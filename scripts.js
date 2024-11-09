@@ -54,3 +54,14 @@ const nameProvinceMap = names.reduce((acc, name, index) => {
   acc[name] = provinces[index];
   return acc;
 }, {});
+console.log(nameProvinceMap);
+
+// Advanced Exercises (Single console.log Execution)
+
+// Log Products
+console.log("\nLog Products:");
+console.log(products.forEach(product => console.log(product.product)));
+
+// Filter by Name Length
+console.log("\nFilter by Name Length:");
+console.log(products.filter(product => product.product.length <= 5));
