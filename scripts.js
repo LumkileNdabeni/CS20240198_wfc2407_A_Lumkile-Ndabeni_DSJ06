@@ -59,22 +59,36 @@ console.log(nameProvinceMap);
 // Advanced Exercises (Single console.log Execution)
 
 // Log Products
-console.log("\nLog Products:");
-console.log(products.forEach(product => console.log(product.product)));
+console.log(products.map(product => product.product).join(', ') +
+  
+  // Filter by Name Length
+  '\nFiltered Products (Name Length > 5): ' + 
+  products.filter(product => product.product.length <= 5).map(product => product.product).join(', ') +
+  
+  // Price Manipulation
+  '\nTotal Price: ' + 
+  products
+    .filter(product => product.price.trim() !== '')
+    .map(product => parseFloat(product.price))
+    .reduce((total, price) => total + price, 0) +
+  
+  // Concatenate Product Names
+  '\nConcatenated Product Names: ' + 
+  products.map(product => product.product).reduce((acc, product) => acc + product, '') +
+  
+  // Find Extremes in Prices
+  '\nPrice Extremes: ' + 
+  (() => {
+    const prices = products
+      .map(product => parseFloat(product.price))
+      .filter(price => !isNaN(price)); 
+    return `Highest: ${Math.max(...prices)}. Lowest: ${Math.min(...prices)}.`;
+  })() +
 
-// Filter by Name Length
-console.log("\nFilter by Name Length:");
-console.log(products.filter(product => product.product.length <= 5));
-
-// Price Manipulation
-console.log("\nPrice Manipulation:");
-const totalPrice = products
-  .filter(product => product.price && !isNaN(product.price))
-  .map(product => Number(product.price))
-  .reduce((acc, price) => acc + price, 0);
-console.log(totalPrice);
-
-// Concatenate Product Names
-console.log("\nConcatenate Product Names:");
-const concatenatedNames = products.reduce((acc, product) => acc + product.product, "");
-console.log(concatenatedNames);
+  // Object Transformation
+  '\nTransformed Products Object: ' + 
+  products.reduce((acc, { product, price }) => {
+    acc[product] = price;
+    return acc;
+  }, {})
+);
